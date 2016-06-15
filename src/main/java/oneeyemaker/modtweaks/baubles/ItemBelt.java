@@ -39,7 +39,6 @@ public class ItemBelt
     public ItemBelt()
     {
         super();
-        this.setMaxDamage(1000);
         this.setHasSubtypes(false);
         this.setMaxStackSize(1);
         this.setCreativeTab(CreativeTabs.tabTools);
