@@ -9,7 +9,6 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import minetweaker.MineTweakerAPI;
-import tconstruct.tools.TinkerTools;
 
 @Mod(modid = ModTweaks.MOD_ID,
      name = ModTweaks.MOD_NAME,

@@ -35,6 +35,10 @@ public class ItemBelt
     extends Item
     implements IBauble
 {
+    private final int FireImmuneMaxLevel = 2;
+    private final int WitherImmuneMaxLevel = 1;
+    private final int RegenerationMaxLevel = 4;
+    @SideOnly(Side.CLIENT)
     private IIcon Icon;
     public ItemBelt()
     {
@@ -76,54 +80,34 @@ public class ItemBelt
             itemStack.setTagCompound(new NBTTagCompound());
         }
         NBTTagCompound tagCompound = itemStack.getTagCompound();
-        int fireImmune = Math.max(Math.min(tagCompound.getInteger("FireImmune"), 2), 0);
-        int witherImmune = Math.max(Math.min(tagCompound.getInteger("WitherImmune"), 1), 0);
-        int regeneration = Math.max(Math.min(tagCompound.getInteger("Regeneration"), 4), 0);
+        int fireImmune = Math.max(Math.min(tagCompound.getInteger("FireImmune"), this.FireImmuneMaxLevel), 0);
+        int witherImmune = Math.max(Math.min(tagCompound.getInteger("WitherImmune"), this.WitherImmuneMaxLevel), 0);
+        int regeneration = Math.max(Math.min(tagCompound.getInteger("Regeneration"), this.RegenerationMaxLevel), 0);
         ArrayList<String> tooltips = new ArrayList<>();
         ArrayList<String> shiftTooltips = new ArrayList<>();
-        if (fireImmune == 0)
+        if (fireImmune > 0)
         {
-            shiftTooltips.add(EnumChatFormatting.AQUA + this.getLocalizedTooltip("FireImmuneI"));
+            tooltips.add(EnumChatFormatting.GREEN + this.getLocalizedTooltip("FireImmune_" + fireImmune));
         }
-        else if (fireImmune == 1)
+        if (fireImmune < this.FireImmuneMaxLevel)
         {
-            tooltips.add(EnumChatFormatting.GREEN + this.getLocalizedTooltip("FireImmuneI"));
-            shiftTooltips.add(EnumChatFormatting.AQUA + this.getLocalizedTooltip("FireImmuneII"));
+            shiftTooltips.add(EnumChatFormatting.AQUA + this.getLocalizedTooltip("FireImmune_" + (fireImmune + 1)));
         }
-        else
+        if (witherImmune > 0)
         {
-            tooltips.add(EnumChatFormatting.GREEN + this.getLocalizedTooltip("FireImmuneII"));
+            tooltips.add(EnumChatFormatting.GREEN + this.getLocalizedTooltip("WitherImmune_" + witherImmune));
         }
-        if (witherImmune == 0)
+        if (witherImmune < this.WitherImmuneMaxLevel)
         {
-            shiftTooltips.add(EnumChatFormatting.AQUA + this.getLocalizedTooltip("WitherImmuneI"));
+            shiftTooltips.add(EnumChatFormatting.AQUA + this.getLocalizedTooltip("WitherImmune_" + (witherImmune + 1)));
         }
-        else
+        if (regeneration > 0)
         {
-            tooltips.add(EnumChatFormatting.GREEN + this.getLocalizedTooltip("WitherImmuneI"));
+            tooltips.add(EnumChatFormatting.GREEN + this.getLocalizedTooltip("Regeneration_" + regeneration));
         }
-        if (regeneration == 0)
+        if (regeneration < this.RegenerationMaxLevel)
         {
-            shiftTooltips.add(EnumChatFormatting.AQUA + this.getLocalizedTooltip("RegenerationI"));
-        }
-        else if (regeneration == 1)
-        {
-            tooltips.add(EnumChatFormatting.GREEN + this.getLocalizedTooltip("RegenerationI"));
-            shiftTooltips.add(EnumChatFormatting.AQUA + this.getLocalizedTooltip("RegenerationII"));
-        }
-        else if (regeneration == 2)
-        {
-            tooltips.add(EnumChatFormatting.GREEN + this.getLocalizedTooltip("RegenerationII"));
-            shiftTooltips.add(EnumChatFormatting.AQUA + this.getLocalizedTooltip("RegenerationIII"));
-        }
-        else if (regeneration == 3)
-        {
-            tooltips.add(EnumChatFormatting.GREEN + this.getLocalizedTooltip("RegenerationIII"));
-            shiftTooltips.add(EnumChatFormatting.AQUA + this.getLocalizedTooltip("RegenerationIV"));
-        }
-        else
-        {
-            tooltips.add(EnumChatFormatting.GREEN + this.getLocalizedTooltip("RegenerationIV"));
+            shiftTooltips.add(EnumChatFormatting.AQUA + this.getLocalizedTooltip("Regeneration_" + (regeneration + 1)));
         }
         list.addAll(tooltips);
         if (!shiftTooltips.isEmpty())
@@ -163,19 +147,19 @@ public class ItemBelt
         int witherImmune = tagCompound.getInteger("WitherImmune");
         int regeneration = tagCompound.getInteger("Regeneration");
         int regenerationCooldown = tagCompound.getInteger("RegenerationCooldown");
-        if (fireImmune >= 3)
+        if (fireImmune > this.FireImmuneMaxLevel)
         {
-            fireImmune = 2;
+            fireImmune = this.FireImmuneMaxLevel;
             itemStack.getTagCompound().setInteger("FireImmune", fireImmune);
         }
-        if (witherImmune >= 2)
+        if (witherImmune > this.WitherImmuneMaxLevel)
         {
-            witherImmune = 1;
+            witherImmune = this.WitherImmuneMaxLevel;
             itemStack.getTagCompound().setInteger("WitherImmune", witherImmune);
         }
-        if (regeneration >= 5)
+        if (regeneration > this.RegenerationMaxLevel)
         {
-            regeneration = 4;
+            regeneration = this.RegenerationMaxLevel;
             itemStack.getTagCompound().setInteger("Regeneration", regeneration);
         }
         if (fireImmune == 1)
@@ -206,8 +190,6 @@ public class ItemBelt
             {
                 if (entityPlayer.getHealth() < entityPlayer.getMaxHealth())
                 {
-                    //entityPlayer.heal(
-                    //Math.min(entityPlayer.getMaxHealth() - entityPlayer.getHealth(), (float) regeneration));
                     entityPlayer.heal((float) regeneration);
                     itemStack.getTagCompound()
                              .setInteger("RegenerationCooldown", 320 / (int) Math.pow(2, regeneration));
