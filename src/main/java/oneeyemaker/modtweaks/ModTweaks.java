@@ -1,9 +1,8 @@
 package oneeyemaker.modtweaks;
 
-import oneeyemaker.modtweaks.baubles.ModBaubles;
+import oneeyemaker.modtweaks.items.ModItems;
 import oneeyemaker.modtweaks.mods.tconstruct.modifiers.*;
 
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -22,10 +21,7 @@ public class ModTweaks
     @EventHandler
     public void preInitialize(FMLPreInitializationEvent preInitializationEvent)
     {
-        if (Loader.isModLoaded("Baubles"))
-        {
-            ModBaubles.initialize();
-        }
+        ModItems.initialize();
     }
     @EventHandler
     public void initialize(FMLInitializationEvent initializationEvent)
