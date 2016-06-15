@@ -1,0 +1,10 @@
+ModTweaks:ItemBelt.name=Upgradeable Belt
+ModTweaks:ItemBelt.FireImmuneI.tooltip=Fire Immune I
+ModTweaks:ItemBelt.FireImmuneII.tooltip=Fire Immune II
+ModTweaks:ItemBelt.WitherImmuneI.tooltip=Wither Immune I
+ModTweaks:ItemBelt.RegenerationI.tooltip=Regeneration I
+ModTweaks:ItemBelt.RegenerationII.tooltip=Regeneration II
+ModTweaks:ItemBelt.RegenerationIII.tooltip=Regeneration III
+ModTweaks:ItemBelt.RegenerationIV.tooltip=Regeneration IV
+ModTweaks:ItemBelt.ShiftTooltip.tooltip=Press Shift to show available upgrades
+ModTweaks:ItemBelt.AvailableUpgrades.tooltip=Available upgrades:

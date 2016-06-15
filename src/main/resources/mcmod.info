@@ -1,0 +1,17 @@
+[
+{
+  "modid": "ModTweaks",
+  "name": "ModTweaks",
+  "description": "Various mod tweaks.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["OneEyeMaker"],
+  "credits": "Made by OneEyeMaker.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
+
