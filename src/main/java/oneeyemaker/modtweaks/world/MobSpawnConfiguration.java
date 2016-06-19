@@ -58,7 +58,8 @@ public class MobSpawnConfiguration
                 BiomeGenBase.SpawnListEntry spawnListEntry = (BiomeGenBase.SpawnListEntry) object;
                 spawnListEntry.itemWeight *= this.Configuration.get("Mob spawn chances",
                                                                     (String) EntityList.classToStringMapping.get(
-                                                                        spawnListEntry.entityClass), 1).getInt(1);
+                                                                        spawnListEntry.entityClass), 1.0D)
+                                                               .getDouble(1.0D);
             }
         }
     }
