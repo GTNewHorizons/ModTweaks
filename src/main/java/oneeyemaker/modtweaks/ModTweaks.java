@@ -48,6 +48,7 @@ public class ModTweaks
             MineTweakerAPI.registerClass(Knockback.class);
             MineTweakerAPI.registerClass(Luck.class);
             MineTweakerAPI.registerClass(Necrotic.class);
+            MineTweakerAPI.registerClass(Repair.class);
             MineTweakerAPI.registerClass(Reinforced.class);
             MineTweakerAPI.registerClass(Sharpness.class);
             MineTweakerAPI.registerClass(SilkTouch.class);
